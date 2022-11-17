@@ -1,8 +1,8 @@
 {
     "name": "wen-bundles",
-    "description": "",
-    "version": "8.3.1",
-    "publisher": "oderwat",
+    "description": "Bundles of VS Code extension used by myself.",
+    "version": "1.0.0",
+    "publisher": "tcui",
     "author": {
         "name": "tcui"
     },
@@ -12,11 +12,11 @@
         "vscode": "^1.52.0"
     },
     "repository": {
-        "url": "https://github.com/oderwat/vscode-indent-rainbow.git",
+        "url": "https://git@github.com:maerson/wen-vscode.git",
         "type": "git"
     },
     "bugs": {
-        "url": "https://github.com/oderwat/vscode-indent-rainbow/issues"
+        "url": ""
     },
     "categories": [
         "Other"
@@ -27,48 +27,29 @@
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "Indent-Rainbow configuration",
+            "title": "Wen-Indent-Rainbow configuration",
             "properties": {
-                "wen.indentRainbow.includedLanguages": {
-                    "type": "array",
-                    "default": [],
-                    "description": "For which languages indent-rainbow should be activated. When empty will use for all languages."
-                },
-                "wen.indentRainbow.excludedLanguages": {
-                    "type": "array",
-                    "default": [
-                        "plaintext"
-                    ],
-                    "description": "For which languages indent-rainbow should be deactivated. When left empty will ignore."
-                },
-                "wen.indentRainbow.ignoreErrorLanguages": {
-                    "type": "array",
-                    "default": [
-                        "markdown"
-                    ],
-                    "description": "For which languages indent-rainbow should skip indent error detection (use '*' to deactivate errors for all languages)."
-                },
-                "wen.indentRainbow.updateDelay": {
+                "wen_indentRainbow.updateDelay": {
                     "type": "integer",
                     "default": 100,
                     "description": "The delay in ms until the editor gets updated."
                 },
-                "wen.indentRainbow.indentSetter": {
+                "wen_indentRainbow.indentSetter": {
                     "type": "object",
                     "default": {},
                     "description": "Automatically change indent settings for languages (see README.md for details)."
                 },
-                "wen.indentRainbow.errorColor": {
+                "wen_indentRainbow.errorColor": {
                     "type": "string",
                     "default": "rgba(128,32,32,0.6)",
                     "description": "Indent color for when there is an error in the indentation, for example if you have your tabs set to 2 spaces but the indent is 3 spaces. Can be any type of web based color format (hex, rgba, rgb)."
                 },
-                "wen.indentRainbow.tabmixColor": {
+                "wen_indentRainbow.tabmixColor": {
                     "type": "string",
                     "default": "rgba(128,32,96,0.6)",
                     "description": "Indent color for when there is a mix between spaces and tabs in the indentation. Can be any type of web based color format (hex, rgba, rgb) or a empty string(to be disabled this coloring)."
                 },
-                "wen.indentRainbow.ignoreLinePatterns": {
+                "wen_indentRainbow.ignoreLinePatterns": {
                     "type": "array",
                     "default": [
                         "/[ \t]* [*]/g",
@@ -76,7 +57,7 @@
                     ],
                     "description": "Skip error highlighting for RegEx patterns. Defaults to c/cpp decorated block and full line comments."
                 },
-                "wen.indentRainbow.colors": {
+                "wen_indentRainbow.colors": {
                     "type": "array",
                     "default": [
                         "rgba(255,255,64,0.07)",
@@ -86,18 +67,18 @@
                     ],
                     "description": "An array with color (hex, rgba, rgb) strings which are used as colors, can be any length."
                 },
-                "wen.indentRainbow.colorOnWhiteSpaceOnly": {
+                "wen_indentRainbow.colorOnWhiteSpaceOnly": {
                     "type": "boolean",
                     "default": false,
                     "description": "If error color is disabled, indent colors will be rendered until the length of rendered characters (white spaces, tabs, and other ones) is divisible by tabsize. Turn on this option to render white spaces and tabs only."
                 },
-                "wen.indentRainbow.indicatorStyle": {
+                "wen_indentRainbow.indicatorStyle": {
                     "type": "string",
                     "default": "classic",
                     "enum": ["classic", "light"],
                     "markdownDescription": "Classic mode uses a full colored tab to indicate the indendation. Light mode will only display a colored border similar to the default indent guide lines. You can disable the default indicators with `#editor.guides.indentation#`."
                 },
-                "wen.indentRainbow.lightIndicatorStyleLineWidth": {
+                "wen_indentRainbow.lightIndicatorStyleLineWidth": {
                     "type": "number",
                     "default": 1,
                     "description": "This property defines the indent indicator lineWidth when using light mode."

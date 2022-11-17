@@ -1,3 +1,14 @@
+
+# 编译打包
+
+```
+npm i vsce -g
+npm install
+vsce package
+```
+
+
+
 # Indent-Rainbow
 
 ## A simple extension to make indentation more readable
@@ -103,12 +114,3 @@ If error color is disabled, indent colors will be rendered until the length of r
 ```js
   "indentRainbow.colorOnWhiteSpaceOnly": true // false is the default
 ```
-
-Build with:
-
-```
-npm install
-npm run vscode:prepublish
-```
-
-Running `npm run compile` makes the compiler recompile on file change.

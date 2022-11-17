@@ -17,23 +17,23 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Error color gets shown when tabs aren't right,
   //  e.g. when you have your tabs set to 2 spaces but the indent is 3 spaces
-  const error_color = vscode.workspace.getConfiguration('indentRainbow')['errorColor'] || "rgba(128,32,32,0.3)";
+  const error_color = vscode.workspace.getConfiguration('wen_indentRainbow')['errorColor'] || "rgba(128,32,32,0.3)";
   const error_decoration_type = vscode.window.createTextEditorDecorationType({
     backgroundColor: error_color
   });
 
-  const tabmix_color = vscode.workspace.getConfiguration('indentRainbow')['tabmixColor'] || "";
+  const tabmix_color = vscode.workspace.getConfiguration('wen_indentRainbow')['tabmixColor'] || "";
   const tabmix_decoration_type = "" !== tabmix_color ? vscode.window.createTextEditorDecorationType({
      backgroundColor: tabmix_color
   }) : null;
 
-  const ignoreLinePatterns = vscode.workspace.getConfiguration('indentRainbow')['ignoreLinePatterns'] || [];
-  const colorOnWhiteSpaceOnly = vscode.workspace.getConfiguration('indentRainbow')['colorOnWhiteSpaceOnly'] || false;
-  const indicatorStyle = vscode.workspace.getConfiguration('indentRainbow')['indicatorStyle'] || 'classic';
-  const lightIndicatorStyleLineWidth = vscode.workspace.getConfiguration('indentRainbow')['lightIndicatorStyleLineWidth'] || 1;
+  const ignoreLinePatterns = vscode.workspace.getConfiguration('wen_indentRainbow')['ignoreLinePatterns'] || [];
+  const colorOnWhiteSpaceOnly = vscode.workspace.getConfiguration('wen_indentRainbow')['colorOnWhiteSpaceOnly'] || false;
+  const indicatorStyle = vscode.workspace.getConfiguration('wen_indentRainbow')['indicatorStyle'] || 'classic';
+  const lightIndicatorStyleLineWidth = vscode.workspace.getConfiguration('wen_indentRainbow')['lightIndicatorStyleLineWidth'] || 1;
 
   // Colors will cycle through, and can be any size that you want
-  const colors = vscode.workspace.getConfiguration('indentRainbow')['colors'] || [
+  const colors = vscode.workspace.getConfiguration('wen_indentRainbow')['colors'] || [
     "rgba(255,255,64,0.07)",
     "rgba(127,255,127,0.07)",
     "rgba(255,127,255,0.07)",
@@ -104,17 +104,12 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   function indentConfig() {
-    var skiplang = vscode.workspace.getConfiguration('indentRainbow')['ignoreErrorLanguages'] || [];
     skipAllErrors = false;
-    if(skiplang.length !== 0) {
-      if(skiplang.indexOf('*') !== -1 || skiplang.indexOf(currentLanguageId) !== -1) {
-        skipAllErrors = true;
-      }
-    }
   }
 
   function checkLanguage() {
     if (activeEditor) {
+      /*
       if(currentLanguageId !== activeEditor.document.languageId) {
         var inclang = vscode.workspace.getConfiguration('indentRainbow')['includedLanguages'] || [];
         var exclang = vscode.workspace.getConfiguration('indentRainbow')['excludedLanguages'] || [];
@@ -131,6 +126,17 @@ export function activate(context: vscode.ExtensionContext) {
           if(exclang.indexOf(currentLanguageId) !== -1) {
             doIt = false;
           }
+        }
+      }*/
+
+      if(currentLanguageId !== activeEditor.document.languageId) {
+        const filename_pattern : RegExp = /[.]wen$/;
+        currentLanguageId = activeEditor.document.languageId;
+
+        if(filename_pattern.test(activeEditor.document.fileName)) {
+          doIt = true;
+        } else {
+          doIt = false;
         }
       }
     }
@@ -154,7 +160,7 @@ export function activate(context: vscode.ExtensionContext) {
     if (timeout) {
       clearTimeout(timeout);
     }
-    var updateDelay = vscode.workspace.getConfiguration('indentRainbow')['updateDelay'] || 100;
+    var updateDelay = vscode.workspace.getConfiguration('wen_indentRainbow')['updateDelay'] || 100;
     timeout = setTimeout(updateDecorations, updateDelay);
   }
 
@@ -203,7 +209,7 @@ export function activate(context: vscode.ExtensionContext) {
       const pos = activeEditor.document.positionAt(match.index);
       const line = activeEditor.document.lineAt(pos).lineNumber;
       let skip = skipAllErrors || ignoreLines.indexOf(line) !== -1; // true if the lineNumber is in ignoreLines.
-     var thematch = match[0];
+      var thematch = match[0];
       var ma = (match[0].replace(re, tabs)).length;
       /**
        * Error handling.

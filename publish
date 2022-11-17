@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -f wen-bundles-*.vsix
+rm -rf out
+npm install && vsce package && vsce publish

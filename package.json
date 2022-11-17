@@ -3,6 +3,7 @@
     "description": "Bundles of VS Code extension used by myself.",
     "version": "1.0.0",
     "publisher": "tcui",
+    "license": "MIT",
     "author": {
         "name": "tcui"
     },
@@ -82,9 +83,49 @@
                     "type": "number",
                     "default": 1,
                     "description": "This property defines the indent indicator lineWidth when using light mode."
-                }
+                },
+
+				"indentOneSpace.workOnSingleLine": {
+					"type": "boolean",
+					"default": true,
+					"description": "Command will execute even when only 1 line is selected."
+				},
+				"indentOneSpace.cramReversed": {
+					"type": "boolean",
+					"default": true,
+					"description": "Outdent lines even if one of them reached column 0 (gutter)."
+				},
+				"indentOneSpace.onlyCompleteRange": {
+					"type": "boolean",
+					"default": false,
+					"description": "Indent only when range is on either side has only whitespace characters and further - line boundaries."
+				}
             }
-        }
+            
+        },
+
+		"commands": [
+			{
+				"command": "extension.indentOneSpace",
+				"title": "Indent one space"
+			},
+			{
+				"command": "extension.reverseIndentOneSpace",
+				"title": "Reverse indent one space"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.indentOneSpace",
+				"key": "space",
+				"when": "editorTextFocus && !editorReadOnly && editorHasSelection"
+			},
+			{
+				"command": "extension.reverseIndentOneSpace",
+				"key": "shift+space",
+				"when": "editorTextFocus && !editorReadOnly && editorHasSelection"
+			}
+		]
     },
     "browser": "./dist/web/extension.js",
     "main": "./out/src/extension",

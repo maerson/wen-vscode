@@ -23,12 +23,13 @@
         "Other"
     ],
     "activationEvents": [
-        "*"
+        "onLanguage:plaintext",
+        "onCommand:completion.openUserDict"
     ],
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "Wen-Indent-Rainbow configuration",
+            "title": "tcui's toolset",
             "properties": {
                 "wen_indentRainbow.updateDelay": {
                     "type": "integer",
@@ -99,9 +100,44 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Indent only when range is on either side has only whitespace characters and further - line boundaries."
-				}
+				},
+                "dictCompletion.leastNumOfChars": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Only show completion list until N characters"
+                },
+                "dictCompletion.addSpaceAfterCompletion": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Add a space after completion"
+                },
+                "dictCompletion.useExternalUserDictFile": {
+                    "type": "boolean",
+                    "default": true,
+                    "markdownDescription": "Use an external user dictionary file or `userDictionary` inside VSCode settings. (The dictionary file can be open with command `Open User Dictionary`.)"
+                },
+                "dictCompletion.externalUserDictFiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [],
+                    "markdownDescription": "A list of paths to dictionary files"
+                },
+                "dictCompletion.userDictionary": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [],
+                    "markdownDescription": "A list of user words for completion (only enabled when `useExternalUserDictFile` is disabled)"
+                },
+                "dictCompletion.programmingLanguage": {
+                    "type": "boolean",
+                    "default": true,
+                    "markdownDescription": "Whether to enable dictionary completion in string and comment of common programming languages"
+                }
             }
-            
         },
 
 		"commands": [
@@ -112,7 +148,11 @@
 			{
 				"command": "extension.reverseIndentOneSpace",
 				"title": "Reverse indent one space"
-			}
+			},
+            {
+                "command": "completion.openUserDict",
+                "title": "Completion: Open User Dictionary"
+            }
 		],
 		"keybindings": [
 			{

@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 
 import { activate_indent_one } from './indent_one';
 import { activate_indent_rainbow } from './indent_rainbow';
+import * as completion from './completion';
 
 // this method is called when vs code is activated
 export function activate(context: vscode.ExtensionContext) {
@@ -11,5 +12,8 @@ export function activate(context: vscode.ExtensionContext) {
 
   activate_indent_one(context);
   activate_indent_rainbow(context);
+  completion.activate(context);
 
 }
+
+export function deactivate() { }
